@@ -6,6 +6,7 @@ import { createBrowserApp } from "@react-navigation/web";
 import { createStackNavigator } from 'react-navigation-stack';
 import Main from "./src/auth/Main";
 import Login from "./src/auth/Login";
+import ProviderMain from "./src/auth/ProviderMain"
 
 export default function App() {
   return (
@@ -56,7 +57,7 @@ HomeStack.navigationOptions = {
 };
 
 const MyNavigator = createSwitchNavigator({
-  Mainstak: Main,
+  Mainstak: ProviderMain,
 
 
 });
