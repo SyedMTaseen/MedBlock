@@ -5,6 +5,7 @@ import MenuPatient from "../components/MenuPatient";
 import InfoNotification from '../components/Patient/Info&Notification';
 import DashboardCard from '../components/Patient/DashboardCard';
 import Hospitals from "../components/Patient/Hospitals"
+import MyReports from '../components/Patient/MyReports';
 export default class Main extends Component {
   render() {
     return (
@@ -15,7 +16,8 @@ export default class Main extends Component {
 {/* 
         <InfoNotification></InfoNotification>
         <DashboardCard></DashboardCard> */}
-        <Hospitals></Hospitals>
+        {/* <Hospitals></Hospitals> */}
+        <MyReports></MyReports>
       </View>
     );
   }
