@@ -57,7 +57,9 @@ HomeStack.navigationOptions = {
 };
 
 const MyNavigator = createSwitchNavigator({
-  Mainstak: ProviderMain,
+  Mainstak: Login,
+  PatientMain:Main,
+  ProviderMain:ProviderMain
 
 
 });
