@@ -14,20 +14,27 @@ export default class Main extends Component {
       PageState: 0,
     }
   }
-  changePageState = () => {
-    if (this.state.PageState >= 3) {
-      this.setState({ PageState: 0 })
-    }
-    else {
-      this.setState({ PageState: ++this.state.PageState })
-    }
+  changePageState = (val) => {
+    // if (this.state.PageState >= 3) {
+
+    this.setState({ PageState: val})
+    // }
+    // else {
+    //   this.setState({ PageState: ++this.state.PageState })
+    // }
+    //  console.log("done")
+    // alert("fon")
   }
+  logout = () => {
+    this.props.navigation.navigate('Mainstak')
+  }
+
   render() {
     return (
       <View style={styles.container}>
-      <Button title="" onPress={this.changePageState}></Button>
-          <MenuPatient></MenuPatient>
-           
+        {/* <Button title="" onPress={this.changePageState}></Button> */}
+        <MenuPatient changePageState={this.changePageState}  logout={this.logout}></MenuPatient>
+
 
 
         {this.state.PageState == 0 ? <InfoNotification></InfoNotification> : null}

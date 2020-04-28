@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 import { MaterialIcons, FontAwesome,Ionicons  } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class MenuPatient extends Component {
+  constructor(props) {
+    super(props);
+   
+  }
+  logout=()=>{
+    this.props.logout()
+ //  this.props.navigation.navigate('Mainstak')
+  }
   render() {
     return (
      
@@ -12,36 +21,17 @@ export default class MenuPatient extends Component {
           <View  >
    
           <Text style={{ fontSize: 12, color: '#fff' ,textAlign:'center' ,fontWeight:'900'}}>Agha Khan Univercity Hospital</Text>
-            {/* <View style={{ alignItems: 'center' }}>
-              <MaterialIcons name="dashboard" size={32} color="#FFF"></MaterialIcons>
-              <Text style={{ fontSize: 12, color: '#fff' }}>Dashboard</Text>
-            </View>
-            <View style={{ height: 20 }}></View> */}
-            {/* <View style={{ alignItems: 'center' }}>
-              <FontAwesome name="hospital-o" size={32} color="#FFF"></FontAwesome>
-              <Text style={{ fontSize: 12, color: '#fff' }}>Hospital</Text>
-            </View> */}
-            {/* <View style={{ height: 20 }}></View>
-            <View style={{ alignItems: 'center' }}>
-              <Ionicons  name="md-paper" size={32} color="#FFF"></Ionicons>
-              <Text style={{ fontSize: 12, color: '#fff' }}>My Reports</Text>
-            </View>
-            <View style={{ height: 20 }}></View>
-            <View style={{ alignItems: 'center' }}>
-              <MaterialIcons name="notifications" size={32} color="#FFF"></MaterialIcons>
-              <Text style={{ fontSize: 12, color: '#fff' }}>Notifications</Text>
-            </View> */}
-
+        
 
 
 
           </View>
 
 
-          <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center' }} onPress={this.logout}>
             <MaterialIcons name="power-settings-new" size={32} color="#FFF"></MaterialIcons>
             <Text style={{ fontSize: 12, color: '#fff' }}>Logout</Text>
-          </View>
+          </TouchableOpacity>
 
 
         </View>

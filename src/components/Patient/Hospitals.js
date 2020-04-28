@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-
-function Item({ title }) {
+function Item({ title,changeReadAccess,changerRWAccess }) {
     return (
         <View style={{ paddingVertical: 10 }}>
             <View style={{ borderBottomWidth: 1, width: '100%', borderBottomColor: "#E7F1F1" }}></View>
@@ -14,8 +14,14 @@ function Item({ title }) {
                     <View style={{ width: 10 }}></View>
                     <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{title}</Text>
                 </View>
-                <View style={{ width: 40, height: 20, backgroundColor: "#7777", borderRadius: 60, borderColor: "#4444", borderWidth: 1, justifyContent: 'center', }}>
-                    <View style={{ width: 18, height: 18, backgroundColor: '#fff', borderRadius: 60 }}></View>
+                <View style={{ flexDirection: "row", alignItems: 'center', width: "15%", justifyContent: 'space-between' }} >
+                    <TouchableOpacity style={{ width: 40, height: 20, backgroundColor: "#7777", borderRadius: 60, borderColor: "#4444", borderWidth: 1, justifyContent: 'center', }} onPress={()=>changeReadAccess(title)}>
+                        <View style={{ width: 18, height: 18, backgroundColor: '#fff', borderRadius: 60 }}></View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ width: 40, height: 20, backgroundColor: "#7777", borderRadius: 60, borderColor: "#4444", borderWidth: 1, justifyContent: 'center', }} onPress={()=>changerRWAccess(title)}>
+                        <View style={{ width: 18, height: 18, backgroundColor: '#fff', borderRadius: 60 }}></View>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -32,17 +38,29 @@ export default class Hospitals extends Component {
                 {
                     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
                     title: 'Agha Khan Hospital',
+                    read: true,
+                    rw: false
                 },
                 {
                     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
                     title: 'Dow Medical College Hospital',
+                    read: true,
+                    rw: false
                 },
                 {
                     id: '58694a0f-3da1-471f-bd96-145571e29d72',
                     title: 'Ziauddin Hospital',
+                    read: true,
+                    rw: false
                 },
             ],
         }
+    }
+    changeReadAccess = (val) => {
+alert(val)
+    }
+    changerRWAccess = (val) => {
+
     }
 
     render() {
@@ -55,12 +73,16 @@ export default class Hospitals extends Component {
                 <View style={{ height: 20 }}></View>
                 <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: "space-between" }}>
                     <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>Hospitals Name</Text>
-                    <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>Access</Text>
+
+                    <View style={{ flexDirection: "row", alignItems: 'center' }} >
+                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginRight: '3%' }}>Read Access</Text>
+                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>R/W Access</Text>
+                    </View>
                 </View>
 
                 <FlatList
                     data={this.state.DATA}
-                    renderItem={({ item }) => <Item title={item.title} />}
+                    renderItem={({ item }) => <Item title={item.title} changeReadAccess={this.changeReadAccess} changerRWAccess={this.changerRWAccess} />}
                     keyExtractor={item => item.id}
                 />
 

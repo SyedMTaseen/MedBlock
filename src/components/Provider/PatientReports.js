@@ -58,6 +58,9 @@ export default class MyReports extends Component {
             ],
         }
     }
+    AddReport=()=>{
+        this.props.changePageState(2)
+    }
 
     render() {
         return (
@@ -69,7 +72,7 @@ export default class MyReports extends Component {
                         <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>Patient personal past records</Text>
                     </View>
 
-                    <TouchableOpacity style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60 ,alignItems:"center",justifyContent:'center'}}>
+                    <TouchableOpacity onPress={this.AddReport} style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60 ,alignItems:"center",justifyContent:'center'}}>
                         <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Insert Data</Text>
                     </TouchableOpacity>
                 </View>

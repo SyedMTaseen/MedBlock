@@ -1,32 +1,50 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 import { MaterialIcons, FontAwesome,Ionicons  } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class MenuPatient extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+         sel:0
+    }
+  }
+
+  changepage=(val)=>{
+      // alert("ss")
+    this.props.changePageState(val)
+
+  }
+  logout=()=>{
+    this.props.logout()
+ //  this.props.navigation.navigate('Mainstak')
+  }
   render() {
     return (
      
         <View style={styles.menuStyle}>
           <View></View>
           <View  >
-            <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(0)}>
               <MaterialIcons name="dashboard" size={32} color="#FFF"></MaterialIcons>
               <Text style={{ fontSize: 12, color: '#fff' }}>Dashboard</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{ height: 20 }}></View>
-            <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(1)}>
               <FontAwesome name="hospital-o" size={32} color="#FFF"></FontAwesome>
               <Text style={{ fontSize: 12, color: '#fff' }}>Hospital</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{ height: 20 }}></View>
-            <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(2)}>
               <Ionicons  name="md-paper" size={32} color="#FFF"></Ionicons>
               <Text style={{ fontSize: 12, color: '#fff' }}>My Reports</Text>
-            </View>
+            </TouchableOpacity>
             <View style={{ height: 20 }}></View>
-            <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(3)}>
               <MaterialIcons name="notifications" size={32} color="#FFF"></MaterialIcons>
               <Text style={{ fontSize: 12, color: '#fff' }}>Notifications</Text>
-            </View>
+            </TouchableOpacity>
 
 
 
@@ -34,10 +52,10 @@ export default class MenuPatient extends Component {
           </View>
 
 
-          <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center' }} onPress={this.logout}>
             <MaterialIcons name="power-settings-new" size={32} color="#FFF"></MaterialIcons>
             <Text style={{ fontSize: 12, color: '#fff' }}>Logout</Text>
-          </View>
+          </TouchableOpacity>
 
 
         </View>

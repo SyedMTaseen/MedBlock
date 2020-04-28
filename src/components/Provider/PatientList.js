@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity, TextInput } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Button, Image, TextInput } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function Item({ title }) {
     return (
@@ -44,6 +44,9 @@ export default class PatientList extends Component {
             ],
         }
     }
+    openDatails=()=>{
+        this.props.changePageState(1)
+    }
 
     render() {
         return (
@@ -83,7 +86,11 @@ export default class PatientList extends Component {
 
                 <FlatList
                     data={this.state.DATA}
-                    renderItem={({ item }) => <Item title={item.title} />}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity onPress={this.openDatails}>
+                            <Item title={item.title} />
+                        </TouchableOpacity>
+                    }
                     keyExtractor={item => item.id}
                 />
 
