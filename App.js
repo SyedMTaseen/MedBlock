@@ -7,6 +7,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Main from "./src/auth/Main";
 import Login from "./src/auth/Login";
 import ProviderMain from "./src/auth/ProviderMain"
+import Signup from "./src/auth/SignUp"
 
 export default function App() {
   return (
@@ -59,8 +60,8 @@ HomeStack.navigationOptions = {
 const MyNavigator = createSwitchNavigator({
   Mainstak: Login,
   PatientMain:Main,
-  ProviderMain:ProviderMain
-
+  ProviderMain:ProviderMain,
+  Signup:Signup,
 
 });
 MyNavigator.path = '';

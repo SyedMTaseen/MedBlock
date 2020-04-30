@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
-
+import axios from 'axios';
 function DetailsItem() {
     return (
         <View style={{ flexDirection: 'column', alignItems: "flex-start", justifyContent: 'center' }}>
@@ -58,6 +58,18 @@ export default class MyReports extends Component {
             ],
         }
     }
+
+  componentWillMount=()=>{
+
+    // link = "http://192.168.32.134:3639/encounter/get?cnic=42101" 
+    // console.log(link)
+    // axios.get(link).then((result) => {
+    //     console.log(result.data)
+
+      
+    // })
+  }
+
     AddReport=()=>{
         this.props.changePageState(2)
     }

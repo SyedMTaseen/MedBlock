@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity, TextInput } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 
+import axios from 'axios';
+
 
 
 
@@ -24,6 +26,18 @@ export default class AddReport extends Component {
                 },
             ],
         }
+    }
+
+    AddReport = () => {
+        link = "http://192.168.32.134:3639/encounter/add?cnic=42101&dr_name=Dr. Zulfiqar&details=lungs failed" 
+        console.log(link)
+        axios.get(link).then((result) => {
+            console.log(result.data)
+
+          
+        })
+
+
     }
 
     render() {
