@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
-function DetailsItem() {
+function DetailsItem({ title }) {
     return (
         <View style={{ flexDirection: 'column', alignItems: "flex-start", justifyContent: 'center' }}>
-            <Text style={{ fontSize: 7, fontWeight: 'bold', color: "#C4C4C4" }}>09 Nov 2019</Text>
+            <Text style={{ fontSize: 7, fontWeight: 'bold', color: "#C4C4C4" }}>{title.apt_time}</Text>
             <View style={{ height: 2 }}></View>
-            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Malaira</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{title.details}</Text>
             <View style={{ height: 2 }}></View>
-            <Text style={{ fontSize: 9, fontWeight: 'bold', color: "#C4C4C4" }}>Blood Report</Text>
+            {/* <Text style={{ fontSize: 9, fontWeight: 'bold', color: "#C4C4C4" }}>Blood Report</Text> */}
 
 
         </View>
@@ -25,9 +25,9 @@ function Item({ title }) {
                 <View style={{ flexDirection: "row", alignItems: 'center' }}>
                     <Image source={require("../../../assets/Patient/Rectangle6.png")} style={{ width: 20, height: 50 }} resizeMode="contain"></Image>
 
-                    <DetailsItem></DetailsItem>
+                    <DetailsItem title={title}></DetailsItem>
                 </View>
-                <Text style={{ fontSize: 12, fontWeight: '800', textAlign: 'left' }}>{title}</Text>
+                <Text style={{ fontSize: 12, fontWeight: '800', textAlign: 'left' }}>{title.dr_name}</Text>
                 <View style={{ width: 80, height: 20, backgroundColor: "#089BAB", borderRadius: 60, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 9, fontWeight: '900', color: '#fff' }}>Open</Text>
                 </View>
@@ -56,22 +56,28 @@ export default class MyReports extends Component {
                     title: 'Ziauddin Hospital',
                 },
             ],
+            cnic: this.props.PatData.cnic,
+            name: this.props.PatData.fname,
+            MyReports:[]
         }
     }
 
-  componentWillMount=()=>{
+    componentWillMount = () => {
 
-    // link = "http://192.168.32.134:3639/encounter/get?cnic=42101" 
-    // console.log(link)
-    // axios.get(link).then((result) => {
-    //     console.log(result.data)
 
-      
-    // })
-  }
+     var   link = "http://192.168.32.134:3639/encounter/get?cnic=" +this.state.cnic
+        console.log(link)
+        axios.get(link).then((result) => {
+            console.log(result.data)
+       this.setState({MyReports:result.data.server_response})
 
-    AddReport=()=>{
-        this.props.changePageState(2)
+        })
+    //        var myR =[ { "dr_name": "Dr. Zulfiqar", "apt_time": "1588534281106", "details": "lungs failed", "uid": "0", "provider_id": "0" } ] 
+    //    this.setState({MyReports:myR})
+    }
+
+    AddReport = () => {
+        this.props.changePageState(2, this.props.PatData)
     }
 
     render() {
@@ -80,13 +86,13 @@ export default class MyReports extends Component {
 
                 <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
                     <View>
-                        <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>David Jackson</Text>
+                        <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>{this.state.name}</Text>
                         <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>Patient personal past records</Text>
                     </View>
-
-                    <TouchableOpacity onPress={this.AddReport} style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60 ,alignItems:"center",justifyContent:'center'}}>
-                        <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Insert Data</Text>
-                    </TouchableOpacity>
+                    {this.props.PatData.access_level == "2" ?
+                        <TouchableOpacity onPress={this.AddReport} style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Insert Data</Text>
+                        </TouchableOpacity> : null}
                 </View>
                 <View style={{ height: 20 }}></View>
                 <View style={{ flex: 1 }}>
@@ -97,8 +103,8 @@ export default class MyReports extends Component {
                     </View>
 
                     <FlatList
-                        data={this.state.DATA}
-                        renderItem={({ item }) => <Item title={item.title} />}
+                        data={this.state.MyReports}
+                        renderItem={({ item }) => <Item title={item} />}
                         keyExtractor={item => item.id}
                     />
                 </View>

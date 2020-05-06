@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 import { MaterialIcons, FontAwesome,Ionicons  } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 export default class MenuPatient extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      username:this.props.UserData[0]
+    }
    
   }
   logout=()=>{
@@ -20,7 +24,7 @@ export default class MenuPatient extends Component {
           </View>
           <View  >
    
-          <Text style={{ fontSize: 12, color: '#fff' ,textAlign:'center' ,fontWeight:'900'}}>Agha Khan Univercity Hospital</Text>
+          <Text style={{ fontSize: 12, color: '#fff' ,textAlign:'center' ,fontWeight:'900'}}>{this.state.username}</Text>
         
 
 

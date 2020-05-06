@@ -10,12 +10,14 @@ export default class Main extends Component {
     super(props);
     this.state = {
       PageState: 0,
+      UserData: this.props.navigation.getParam('UserData', 'Something'),
+      PatData:null,
     }
   }
-  changePageState = (val) => {
+  changePageState = (val,data) => {
     // if (this.state.PageState >= 3) {
 
-    this.setState({ PageState: val })
+    this.setState({ PageState: val ,PatData:data })
     // }
     // else {
     //   this.setState({ PageState: ++this.state.PageState })
@@ -30,10 +32,10 @@ export default class Main extends Component {
     return (
       <View style={styles.container}>
         {/* <Button title="" onPress={this.changePageState}></Button> */}
-        <MenuProvider logout={this.logout}></MenuProvider>
-        {this.state.PageState == 0 ? <PatientList changePageState={this.changePageState}></PatientList> : null}
-        {this.state.PageState == 1 ? <PatientReports changePageState={this.changePageState}></PatientReports> : null}
-        {this.state.PageState == 2 ? <AddReport changePageState={this.changePageState}></AddReport> : null}
+        <MenuProvider logout={this.logout} UserData={this.state.UserData}></MenuProvider>
+        {this.state.PageState == 0 ? <PatientList UserData={this.state.UserData} changePageState={this.changePageState}></PatientList> : null}
+        {this.state.PageState == 1 ? <PatientReports PatData={this.state.PatData} UserData={this.state.UserData} changePageState={this.changePageState}></PatientReports> : null}
+        {this.state.PageState == 2 ? <AddReport PatData={this.state.PatData} UserData={this.state.UserData} changePageState={this.changePageState}></AddReport> : null}
 
 
       </View>

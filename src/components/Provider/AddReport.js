@@ -25,15 +25,20 @@ export default class AddReport extends Component {
                     title: 'Jackson',
                 },
             ],
+            cnic: this.props.PatData.cnic,
+            name: this.props.PatData.fname,
+            doctorname:"",
+            details:"",
         }
     }
 
     AddReport = () => {
-        var  link = "http://192.168.32.134:3639/encounter/add?cnic=42101&dr_name=Dr. Zulfiqar&details=lungs failed" 
+        var  link = "http://192.168.32.134:3639/encounter/add?cnic="+this.state.cnic+"&dr_name="+this.state.doctorname+"&details="+this.state.details 
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
-
+            alert("Successfully added patient record.")
+            this.props.changePageState(0,this.props.PatData)
           
         })
 
@@ -46,9 +51,11 @@ export default class AddReport extends Component {
                 <View style={{ width: "100%", flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <View>
                         <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>Add Report</Text>
-                        <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>David Jackson</Text>
+                        <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>{this.state.name}</Text>
                     </View>
-                    <TouchableOpacity style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                    <TouchableOpacity 
+                    onPress={this.AddReport}
+                    style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
                         <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Save Report</Text>
                     </TouchableOpacity>
                 </View>
@@ -84,7 +91,7 @@ export default class AddReport extends Component {
                                 style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
                                 placeholder='Title'
                                 placeholderTextColor='#777'
-                                secureTextEntry={this.state.showPassword}
+                           
                                 autoCapitalize='none'
                                 onChangeText={(password) => { this.setState({ password }); }}//email set
                             />
@@ -101,9 +108,9 @@ export default class AddReport extends Component {
                                 style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
                                 placeholder="Full name"
                                 placeholderTextColor='#777'
-                                secureTextEntry={this.state.showPassword}
+                                
                                 autoCapitalize='none'
-                                onChangeText={(password) => { this.setState({ password }); }}//email set
+                                onChangeText={(doctorname) => { this.setState({ doctorname }); }}//email set
                             />
                         </View>
                     </View>
@@ -119,7 +126,7 @@ export default class AddReport extends Component {
                             style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
                             placeholder=''
                             placeholderTextColor='#777'
-                            secureTextEntry={this.state.showPassword}
+                        
                             autoCapitalize='none'
                             onChangeText={(password) => { this.setState({ password }); }}//email set
                         />
@@ -135,10 +142,10 @@ export default class AddReport extends Component {
                             style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
                             placeholder='Type here'
                             placeholderTextColor='#777'
-                            secureTextEntry={this.state.showPassword}
+                          
                             autoCapitalize='none'
 
-                            onChangeText={(password) => { this.setState({ password }); }}//email set
+                            onChangeText={(details) => { this.setState({ details }); }}//email set
                         />
                     </View>
                 </View>
