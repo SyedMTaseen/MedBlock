@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
+import axios from 'axios';
 export default class SignUp extends Component {
 
 
@@ -14,6 +15,29 @@ export default class SignUp extends Component {
 
   changeUser = () => {
     this.setState({ UserIs: !this.state.UserIs })
+
+  }
+
+  SignUp=()=>{
+    if (this.state.UserIs) {
+      var  link = "http://192.168.32.134:3639/patient/signup?fname=soman&pat_address=a-301&city=khi&country=pak&weight=40kg&height=5ft&cnic=42101&dob=2nd sept 1996&email=baqai@baqai.com&password=123"
+      console.log(link)
+      axios.get(link).then((result) => {
+        console.log(result.data)
+        this.props.navigation.navigate('PatientMain') 
+    
+      })
+
+    } else {
+
+      var  link = "http://192.168.32.134:3639/provider/signup?fname=saifee&prov_address=a-301&city=khi&country=pak&prov_type=lab&email=saify@saify.com&password=123"
+      console.log(link)
+      axios.get(link).then((result) => {
+        console.log(result.data)
+        this.props.navigation.navigate('ProviderMain')
+      })
+
+    }
 
   }
   render() {
@@ -149,7 +173,7 @@ export default class SignUp extends Component {
 
         <View style={{ paddingVertical: 22 }}>
           <TouchableOpacity
-            onPress={() => { this.props.navigation.navigate('PatientMain') }}
+            onPress={() => { this.SignUp()}}
             style={{ width: "60%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
             <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Sign Up</Text>
           </TouchableOpacity>
@@ -307,7 +331,7 @@ export default class SignUp extends Component {
 
         <View style={{ paddingVertical: 22 }}>
           <TouchableOpacity
-            onPress={() => { this.props.navigation.navigate('ProviderMain') }}
+            onPress={() => {this.SignUp() }}
             style={{ width: "60%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
             <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Sign Up</Text>
           </TouchableOpacity>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 
-
+import axios from 'axios';
 function Item({ title }) {
     return (
         <View style={{ paddingVertical:10}}>
@@ -42,6 +42,17 @@ export default class Hospitals extends Component {
                 },
             ],
         }
+
+    }
+
+    componentWillMount=()=>{
+        var  link = " http://192.168.32.134:3639/patient_permission_requests_list/get?pat_cnic=42101"
+        console.log(link)
+        axios.get(link).then((result) => {
+          console.log(result.data)
+         
+      
+        })
     }
 
     render() {

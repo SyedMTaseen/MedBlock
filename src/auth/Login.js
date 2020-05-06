@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 
-
+import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 export default class Login extends Component {
 
@@ -11,12 +11,37 @@ export default class Login extends Component {
     super(props);
     this.state = {
       showPassword: true,
-      UserIs: true // true is patient false is provider
+      UserIs: true, // true is patient false is provider
+      username: "",
+      password: "",
     }
   }
 
   changeUser = () => {
     this.setState({ UserIs: !this.state.UserIs })
+
+  }
+
+  login = () => {
+    // if (this.state.UserIs) {
+    //  var  link = " http://192.168.32.134:3639/patient/login?username=42101&password=123"
+    //   console.log(link)
+    //   axios.get(link).then((result) => {
+    //     console.log(result.data)
+    //     this.props.navigation.navigate('PatientMain') 
+    
+    //   })
+
+    // } else {
+
+    //  var link = "http://192.168.32.134:3639/provider/login?username=saify@saify.com&password=123"
+    //   console.log(link)
+    //   axios.get(link).then((result) => {
+    //     console.log(result.data)
+    //     this.props.navigation.navigate('ProviderMain')
+    //   })
+
+    // }
 
   }
 
@@ -64,7 +89,7 @@ export default class Login extends Component {
 
           <View style={{ paddingVertical: 22 }}>
             <TouchableOpacity
-              onPress={() => { this.props.navigation.navigate('PatientMain') }}
+              onPress={() => {this.login()}}
               style={{ width: "100%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
               <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Sign In</Text>
             </TouchableOpacity>
@@ -147,7 +172,7 @@ export default class Login extends Component {
 
           <View style={{ paddingVertical: 22 }}>
             <TouchableOpacity
-              onPress={() => { this.props.navigation.navigate('ProviderMain') }}
+              onPress={() => { this.login() }}
               style={{ width: "100%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
               <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Sign In</Text>
             </TouchableOpacity>

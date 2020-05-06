@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import axios from 'axios';
 
 function Item({ title,changeReadAccess,changerRWAccess }) {
     return (
@@ -57,10 +58,33 @@ export default class Hospitals extends Component {
         }
     }
     changeReadAccess = (val) => {
-alert(val)
+        var link = "http://192.168.32.134:3639/patient_permissions_list/update?pat_cnic=42101&prov_id=12&access_level=1"
+        console.log(link)
+        axios.get(link).then((result) => {
+          console.log(result.data)
+         
+      
+        })
+
     }
     changerRWAccess = (val) => {
+        var   link = "http://192.168.32.134:3639/patient_permissions_list/update?pat_cnic=42101&prov_id=12&access_level=1"
+        console.log(link)
+        axios.get(link).then((result) => {
+          console.log(result.data)
+         
+      
+        })
 
+    }
+    componentWillMount=()=>{
+        var link = "http://192.168.32.134:3639/patient_permissions_list/get?pat_cnic=42101"
+        console.log(link)
+        axios.get(link).then((result) => {
+          console.log(result.data)
+         
+      
+        })
     }
 
     render() {

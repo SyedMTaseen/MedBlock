@@ -29,7 +29,7 @@ export default class AddReport extends Component {
     }
 
     AddReport = () => {
-        link = "http://192.168.32.134:3639/encounter/add?cnic=42101&dr_name=Dr. Zulfiqar&details=lungs failed" 
+        var  link = "http://192.168.32.134:3639/encounter/add?cnic=42101&dr_name=Dr. Zulfiqar&details=lungs failed" 
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
