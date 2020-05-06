@@ -3,6 +3,19 @@ import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 export default class PatientInfo extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+       username:this.props.UserData[0],
+       dateofBirth:this.props.UserData[2],
+    }
+
+}
+
+  componentWillMount(){
+    console.log(this.props.UserData[0])
+  }
   render() {
     return (
   
@@ -20,13 +33,13 @@ export default class PatientInfo extends Component {
             alignItems: 'center'
           }}>
 
-            <Text style={{ color: '#000', fontSize: 16, fontWeight: '600' }} >David JackSon</Text>
-            <Text style={{ color: '#7777', fontSize: 14, fontWeight: '400' }} >21 Karachi Pakistan</Text>
+            <Text style={{ color: '#000', fontSize: 16, fontWeight: '600' }} >{this.state.username}</Text>
+            <Text style={{ color: '#7777', fontSize: 14, fontWeight: '400' }} >Karachi Pakistan</Text>
             <View style={{ height: '20%' }}></View>
             <View style={{ flexDirection: 'row', width: '80%', justifyContent: 'space-between', alignItems: 'center' }}>
               <View style={{ flexDirection: 'column', }}>
-                <Text style={{ color: '#089BAB', fontSize: 12, fontWeight: '600' }} >Blood</Text>
-                <Text style={{ color: '#000', fontSize: 12, fontWeight: '400' }} >B+</Text>
+                <Text style={{ color: '#089BAB', fontSize: 12, fontWeight: '600' }} >Birth</Text>
+                <Text style={{ color: '#000', fontSize: 12, fontWeight: '400' }} >{this.state.dateofBirth}</Text>
               </View>
               <View style={{ flexDirection: 'column', }}>
                 <Text style={{ color: '#089BAB', fontSize: 12, fontWeight: '600' }} >Height</Text>

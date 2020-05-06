@@ -12,8 +12,13 @@ export default class Main extends Component {
     super(props);
     this.state = {
       PageState: 0,
+      UserData: this.props.navigation.getParam('UserData', 'Something')
     }
   }
+
+  // componentWillMount(){
+  //   console.log(this.state.UserData)
+  // }
   changePageState = (val) => {
     // if (this.state.PageState >= 3) {
 
@@ -37,11 +42,11 @@ export default class Main extends Component {
 
 
 
-        {this.state.PageState == 0 ? <InfoNotification></InfoNotification> : null}
-        {this.state.PageState == 0 ? <DashboardCard></DashboardCard> : null}
-        {this.state.PageState == 1 ? <Hospitals></Hospitals> : null}
-        {this.state.PageState == 2 ? <MyReports></MyReports> : null}
-        {this.state.PageState == 3 ? <Notification></Notification> : null}
+        {this.state.PageState == 0 ? <InfoNotification UserData={this.state.UserData}></InfoNotification> : null}
+        {this.state.PageState == 0 ? <DashboardCard UserData={this.state.UserData}></DashboardCard> : null}
+        {this.state.PageState == 1 ? <Hospitals UserData={this.state.UserData}></Hospitals> : null}
+        {this.state.PageState == 2 ? <MyReports UserData={this.state.UserData}></MyReports> : null}
+        {this.state.PageState == 3 ? <Notification UserData={this.state.UserData}></Notification> : null}
       </View>
     );
   }

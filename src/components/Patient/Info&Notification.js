@@ -52,7 +52,7 @@ export default class InfoNotification extends Component {
 
             <View style={{ width: "20%", height: "100%", justifyContent: 'center', alignItems: 'center' }}>
 
-                <PatientInfo></PatientInfo>
+                <PatientInfo UserData={this.props.UserData}></PatientInfo>
                 <View style={{ height: '3%' }}></View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', width: '80%', justifyContent: 'space-between' }}>
                     <Text style={{ color: '#089BAB', fontSize: 16, fontWeight: '600' }} >Notification</Text>

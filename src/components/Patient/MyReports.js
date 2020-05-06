@@ -2,21 +2,23 @@ import React, { Component } from 'react';
 import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
-function DetailsItem() {
+function DetailsItem({data}) {
+
+    // var date=new Date()
     return (
         <View style={{ flexDirection: 'column', alignItems: "flex-start", justifyContent: 'center' }}>
-            <Text style={{ fontSize: 7, fontWeight: 'bold', color: "#C4C4C4" }}>09 Nov 2019</Text>
+            <Text style={{ fontSize: 7, fontWeight: 'bold', color: "#C4C4C4" }}>{data.apt_time}</Text>
             <View style={{ height: 2 }}></View>
-            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Malaira</Text>
+            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{data.details}</Text>
             <View style={{ height: 2 }}></View>
-            <Text style={{ fontSize: 9, fontWeight: 'bold', color: "#C4C4C4" }}>Blood Report</Text>
+            {/* <Text style={{ fontSize: 9, fontWeight: 'bold', color: "#C4C4C4" }}>Blood Report</Text> */}
 
 
         </View>
     );
 }
 
-function Item({ title }) {
+function Item({ data }) {
     return (
         <View style={{ paddingVertical: 10 }}>
             <View style={{ borderBottomWidth: 1, width: '100%', borderBottomColor: "#E7F1F1" }}></View>
@@ -25,9 +27,9 @@ function Item({ title }) {
                 <View style={{ flexDirection: "row", alignItems: 'center' }}>
                     <Image source={require("../../../assets/Patient/Rectangle6.png")} style={{ width: 20, height: 50 }} resizeMode="contain"></Image>
 
-                    <DetailsItem></DetailsItem>
+                    <DetailsItem data={data}></DetailsItem>
                 </View>
-                <Text style={{ fontSize: 12, fontWeight: '800', textAlign: 'left' }}>{title}</Text>
+                <Text style={{ fontSize: 12, fontWeight: '800', textAlign: 'left' }}>{data.dr_name}</Text>
                 <View style={{ width: 80, height: 20, backgroundColor: "#089BAB", borderRadius: 60, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 9, fontWeight: '900', color: '#fff' }}>Open</Text>
                 </View>
@@ -56,15 +58,18 @@ export default class MyReports extends Component {
                     title: 'Ziauddin Hospital',
                 },
             ],
+            MyReports: []
         }
     }
-    componentWillMount(){
-        var link = " http://192.168.32.134:3639/encounter/get?cnic=42101"
+    componentWillMount() {
+        var link = " http://192.168.32.134:3639/encounter/get?cnic="+this.props.UserData[1]
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
-         
-      
+          this.setState({MyReports:result.data.server_response})
+      //  var myR =[ { "dr_name": "Dr. Zulfiqar", "apt_time": "1588534281106", "details": "lungs failed", "uid": "0", "provider_id": "0" } ] 
+       // this.setState({MyReports:myR})
+
         })
     }
 
@@ -85,8 +90,8 @@ export default class MyReports extends Component {
                     </View>
 
                     <FlatList
-                        data={this.state.DATA}
-                        renderItem={({ item }) => <Item title={item.title} />}
+                        data={this.state.MyReports}
+                        renderItem={({ item }) => <Item data={item} />}
                         keyExtractor={item => item.id}
                     />
                 </View>

@@ -9,7 +9,20 @@ export default class SignUp extends Component {
     super(props);
     this.state = {
       showPassword: true,
-      UserIs: true // true is patient false is provider
+      UserIs: true, // true is patient false is provider
+      username:"",
+      address:"",
+      city:"",
+      country:"",
+      weight:"",
+      height:"",
+      cnic:"",
+      dateOfBirth:"",
+      email:"",
+      password:"",
+      prov_address:"",
+      prov_type:"",
+
     }
   }
 
@@ -20,21 +33,21 @@ export default class SignUp extends Component {
 
   SignUp=()=>{
     if (this.state.UserIs) {
-      var  link = "http://192.168.32.134:3639/patient/signup?fname=soman&pat_address=a-301&city=khi&country=pak&weight=40kg&height=5ft&cnic=42101&dob=2nd sept 1996&email=baqai@baqai.com&password=123"
+      var  link = "http://192.168.32.134:3639/patient/signup?fname="+this.state.username+"&pat_address="+this.state.address+"&city="+this.state.city+"&country="+this.state.country+"&weight="+this.state.weight+"&height="+this.state.height+"&cnic="+this.state.cnic+"&dob="+this.state.dateOfBirth+"&email="+this.state.email+"&password="+this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)
-        this.props.navigation.navigate('PatientMain') 
+        this.props.navigation.navigate('Mainstak') 
     
       })
 
     } else {
 
-      var  link = "http://192.168.32.134:3639/provider/signup?fname=saifee&prov_address=a-301&city=khi&country=pak&prov_type=lab&email=saify@saify.com&password=123"
+      var  link = "http://192.168.32.134:3639/provider/signup?fname="+this.state.username+"&prov_address="+this.state.prov_address+"&city="+this.state.city+"&country="+this.state.country+"&prov_type="+this.state.prov_type+"&email="+this.state.email+"&password="+this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)
-        this.props.navigation.navigate('ProviderMain')
+        this.props.navigation.navigate('Mainstak')
       })
 
     }
@@ -61,7 +74,7 @@ export default class SignUp extends Component {
                 placeholder='name'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(username) => { this.setState({ username }); }}//email set
               />
             </View>
           </View>
@@ -75,7 +88,7 @@ export default class SignUp extends Component {
                 placeholder='CNIC'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(cnic) => { this.setState({ cnic }); }}//email set
               />
             </View>
           </View>
@@ -90,7 +103,7 @@ export default class SignUp extends Component {
               placeholder='Address'
               placeholderTextColor='#777'
               autoCapitalize='none'
-              onChangeText={(password) => { this.setState({ password }); }}//email set
+              onChangeText={(address) => { this.setState({ address }); }}//email set
             />
           </View>
         </View>
@@ -106,7 +119,7 @@ export default class SignUp extends Component {
                 placeholder='CITY'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(city) => { this.setState({ city }); }}//email set
               />
             </View>
           </View>
@@ -120,7 +133,7 @@ export default class SignUp extends Component {
                 placeholder='Country'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(country) => { this.setState({ country }); }}//email set
               />
             </View>
           </View>
@@ -134,7 +147,7 @@ export default class SignUp extends Component {
                 placeholder='DoB'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(dateOfBirth) => { this.setState({ dateOfBirth }); }}//email set
               />
             </View>
           </View>
@@ -150,7 +163,7 @@ export default class SignUp extends Component {
                 placeholder='Email'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(email) => { this.setState({ email }); }}//email set
               />
             </View>
           </View>
@@ -232,7 +245,7 @@ export default class SignUp extends Component {
                 placeholder='name'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(username) => { this.setState({ username }); }}//email set
               />
             </View>
           </View>
@@ -248,7 +261,7 @@ export default class SignUp extends Component {
               placeholder='Address'
               placeholderTextColor='#777'
               autoCapitalize='none'
-              onChangeText={(password) => { this.setState({ password }); }}//email set
+              onChangeText={(prov_address) => { this.setState({ prov_address }); }}//email set
             />
           </View>
         </View>
@@ -264,7 +277,7 @@ export default class SignUp extends Component {
                 placeholder='CITY'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(city) => { this.setState({ city }); }}//email set
               />
             </View>
           </View>
@@ -278,7 +291,7 @@ export default class SignUp extends Component {
                 placeholder='Country'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(country) => { this.setState({ country }); }}//email set
               />
             </View>
           </View>
@@ -292,7 +305,7 @@ export default class SignUp extends Component {
                 placeholder='Provider Type'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(prov_type) => { this.setState({ prov_type }); }}//email set
               />
             </View>
           </View>
@@ -308,7 +321,7 @@ export default class SignUp extends Component {
                 placeholder='Email'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(email) => { this.setState({ email }); }}//email set
               />
             </View>
           </View>

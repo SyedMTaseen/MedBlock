@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import axios from 'axios';
-function Item({ title }) {
+function Item({ data }) {
     return (
         <View style={{ paddingVertical:10}}>
                 <View style={{ borderBottomWidth: 1, width: '100%', borderBottomColor: "#E7F1F1" }}></View>
@@ -12,12 +12,12 @@ function Item({ title }) {
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <View style={{ width: 10, height: 10, backgroundColor: '#45D053', borderRadius: 60 }}></View>
                     <View style={{ width: 10 }}></View>
-                    <Text style={{fontSize:9,fontWeight:'bold'}}>Agha Khan Hospital</Text>
+                    <Text style={{fontSize:9,fontWeight:'bold'}}>{data.fname}</Text>
                 </View>
                 <Text style={{fontSize:9,fontWeight:'bold', color:"#C4C4C4"}}>09 Nov 2019</Text>
             </View>
             <View style={{height:5 }}></View>
-            <Text style={{fontSize:12,color:"#777777",paddingHorizontal: 22,}}>{title}</Text>
+            <Text style={{fontSize:12,color:"#777777",paddingHorizontal: 22,}}>Has requested {data.access_level=="1"?"Read Access":""} {data.access_level=="2"?"Read and Write Access":""}</Text>
          
         </View>
     );
@@ -41,17 +41,20 @@ export default class Hospitals extends Component {
                     title: 'Ziauddin Hospital',
                 },
             ],
+            NotificationList:[]
         }
 
     }
 
     componentWillMount=()=>{
-        var  link = " http://192.168.32.134:3639/patient_permission_requests_list/get?pat_cnic=42101"
+        var  link = " http://192.168.32.134:3639/patient_permission_requests_list/get?pat_cnic="+this.props.UserData[1]
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
-         
-      
+          this.setState({NotificationList:result.data.server_response.provider_list})
+
+        //  var data=[ { "uid": "0", "patient_address": "0x064FD681DcE8A3EA2e821e3D2C9e85A04fe0ED71", "fname": "south", "password": "123", "email": "south@south.com", "prov_type": "lab", "prov_address": "a-301", "city": "khi", "country": "pak", "signup_time": "1588530495486", "access_level": "2" } ]
+        //  this.setState({NotificationList:data})
         })
     }
 
@@ -65,8 +68,8 @@ export default class Hospitals extends Component {
                 <View style={{ height: 20 }}></View>
                 
                 <FlatList
-                    data={this.state.DATA}
-                    renderItem={({ item }) => <Item title={item.title} />}
+                    data={this.state.NotificationList}
+                    renderItem={({ item }) => <Item data={item} />}
                     keyExtractor={item => item.id}
                 />
 

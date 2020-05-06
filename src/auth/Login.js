@@ -23,25 +23,34 @@ export default class Login extends Component {
   }
 
   login = () => {
-    // if (this.state.UserIs) {
-    //  var  link = " http://192.168.32.134:3639/patient/login?username=42101&password=123"
-    //   console.log(link)
-    //   axios.get(link).then((result) => {
-    //     console.log(result.data)
-    //     this.props.navigation.navigate('PatientMain') 
-    
-    //   })
+    if (this.state.UserIs) {
+      //  var  link = " http://192.168.32.134:3639/patient/login?username="+this.state.username+"&password="+this.state.password
+      //   console.log(link)
+      //   axios.get(link).then((result) => {
+      //     console.log(result.data)
+      //  var data =result.data.server_response
+      var data = { "0": "soman", "1": "42101", "2": "2nd sept 1996", "3": "baqai@baqai.com", "4": "0x064FD681DcE8A3EA2e821e3D2C9e85A04fe0ED71", "5": "0" }
+      this.props.navigation.navigate('PatientMain', {
+        UserData: data,
+      });
 
-    // } else {
+      // })
 
-    //  var link = "http://192.168.32.134:3639/provider/login?username=saify@saify.com&password=123"
-    //   console.log(link)
-    //   axios.get(link).then((result) => {
-    //     console.log(result.data)
-    //     this.props.navigation.navigate('ProviderMain')
-    //   })
+    } else {
 
-    // }
+      //  var link = "http://192.168.32.134:3639/provider/login?username="+this.state.username+"&password="+this.state.password
+      //   console.log(link)
+      //   axios.get(link).then((result) => {
+      //     console.log(result.data)
+      //  var data =result.data.server_response
+      var data = { "0": "south", "1": "south@south.com", "2": "lab", "3": "south@south.com", "4": "0x064FD681DcE8A3EA2e821e3D2C9e85A04fe0ED71", "5": "0" }
+      this.props.navigation.navigate('ProviderMain', {
+        UserData: data,
+      });
+
+      //   })
+
+    }
 
   }
 
@@ -66,7 +75,7 @@ export default class Login extends Component {
                 placeholder='CNIC'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(username) => { this.setState({ username }); }}//email set
               />
             </View>
           </View>
@@ -89,7 +98,7 @@ export default class Login extends Component {
 
           <View style={{ paddingVertical: 22 }}>
             <TouchableOpacity
-              onPress={() => {this.login()}}
+              onPress={() => { this.login() }}
               style={{ width: "100%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
               <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Sign In</Text>
             </TouchableOpacity>
