@@ -50,13 +50,13 @@ export default class AddReport extends Component {
             <View style={styles.cardView}>
                 <View style={{ width: "100%", flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <View>
-                        <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>Add Report</Text>
+                        <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>Add Encounter</Text>
                         <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>{this.state.name}</Text>
                     </View>
                     <TouchableOpacity 
                     onPress={this.AddReport}
-                    style={{ width: "10%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Save Report</Text>
+                    style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Save Encounter</Text>
                     </TouchableOpacity>
                 </View>
                 {/* <View style={{ height: 20 }}></View>
@@ -83,7 +83,7 @@ export default class AddReport extends Component {
                 <View style={{ height: 20 }}></View>
                 <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: "space-between" }}>
                     <View style={{ width: '30%' }}>
-                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>Report Title</Text>
+                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>Encounter Time</Text>
                         <View style={{ height: 5 }}></View>
                         <View style={{ width: '100%', height: 30, backgroundColor: '#E7F1F1', borderColor: "#c3c3c3", borderWidth: 1, paddingHorizontal: '2%', justifyContent: 'center', borderRadius: 60 }}>
                             <TextInput
@@ -91,7 +91,8 @@ export default class AddReport extends Component {
                                 style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
                                 placeholder='Title'
                                 placeholderTextColor='#777'
-                           
+                                value= {new Date().getDate() + "-" + new Date().getMonth() + "-" + new Date().getFullYear()}
+                                editable = {true}
                                 autoCapitalize='none'
                                 onChangeText={(password) => { this.setState({ password }); }}//email set
                             />
