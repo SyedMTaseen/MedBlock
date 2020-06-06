@@ -163,13 +163,13 @@ export default class Login extends Component {
           </View>
 
           <View style={{ width: '100%', paddingVertical: 10 }}>
-            <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>User CNIC</Text>
+            <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold" }}>User Email</Text>
             <View style={{ height: 5 }}></View>
             <View style={{ width: '100%', height: 30, backgroundColor: '#E7F1F1', borderColor: "#c3c3c3", borderWidth: 1, paddingHorizontal: '2%', justifyContent: 'center', borderRadius: 60 }}>
               <TextInput
                 ref="textInputMobile"
                 style={{ fontSize: 15, color: '#000', width: '100%', borderRadius: 60 }}
-                placeholder='CNIC'
+                placeholder='Email'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
                 onChangeText={(username) => { this.setState({ username }); }}//email set

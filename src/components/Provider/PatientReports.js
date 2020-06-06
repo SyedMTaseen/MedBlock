@@ -73,7 +73,9 @@ export default class MyReports extends Component {
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
-            this.setState({ MyReports: result.data.server_response })
+            if (result.data.server_response != "API failed: SyntaxError: Unexpected token ] in JSON at position 0") {
+                this.setState({ MyReports: result.data.server_response })
+            }
 
         })
         // var myR = [{ "dr_name": "Dr. Zulfiqar", "apt_time": "1588534281106", "details": "lungs failed", "uid": "0", "provider_id": "0" }]
@@ -86,6 +88,9 @@ export default class MyReports extends Component {
     OpenDetails = (no, data) => {
         this.setState({ Page: no, selected: data })
     }
+    goback = () => {
+        this.props.changePageState(0, this.props.PatData)
+    }
 
     render() {
         if (this.state.Page == 0) {
@@ -97,10 +102,18 @@ export default class MyReports extends Component {
                             <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>{this.state.name}</Text>
                             <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>Patient personal past records</Text>
                         </View>
-                        {/* {this.props.PatData.access_level == "2" ?
-                        <TouchableOpacity onPress={this.AddReport} style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Insert Encounter</Text>
-                        </TouchableOpacity> : null} */}
+                        <View style={{ flexDirection: 'row', width: '50%' }}>
+                            {this.props.PatData.access_level == "2" ?
+                                <TouchableOpacity onPress={this.AddReport} style={{ width: "50%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                                    <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Insert Encounter</Text>
+                                </TouchableOpacity>
+
+                                : null}
+                            <Text>   </Text>
+                            <TouchableOpacity onPress={this.goback} style={{ width: "50%", height: 30, backgroundColor: "#7777", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                                <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Back</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={{ height: 20 }}></View>
                     <View style={{ flex: 1 }}>

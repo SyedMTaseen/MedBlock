@@ -19,7 +19,7 @@ function DetailsItem({ data }) {
     );
 }
 
-function Item({ data,OpenDetails }) {
+function Item({ data, OpenDetails }) {
     return (
         <View style={{ paddingVertical: 10 }}>
             <View style={{ borderBottomWidth: 1, width: '100%', borderBottomColor: "#E7F1F1" }}></View>
@@ -32,8 +32,8 @@ function Item({ data,OpenDetails }) {
                 </View>
                 <Text style={{ fontSize: 12, fontWeight: '800', textAlign: 'left' }}>{data.dr_name}</Text>
                 <TouchableOpacity
-                 onPress={()=>OpenDetails(1,data)}
-                 style={{ width: 80, height: 20, backgroundColor: "#089BAB", borderRadius: 60, justifyContent: 'center', alignItems: 'center' }}>
+                    onPress={() => OpenDetails(1, data)}
+                    style={{ width: 80, height: 20, backgroundColor: "#089BAB", borderRadius: 60, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 9, fontWeight: '900', color: '#fff' }}>Open</Text>
                 </TouchableOpacity>
             </View>
@@ -63,23 +63,25 @@ export default class MyReports extends Component {
                 },
             ],
             MyReports: [],
-            selected:null,
+            selected: null,
         }
     }
     componentWillMount() {
-        var link = " http://18.234.214.14:3639/encounter/get?cnic="+this.props.UserData[1]
+        var link = " http://18.234.214.14:3639/encounter/get?cnic=" + this.props.UserData[1]
         console.log(link)
         axios.get(link).then((result) => {
-          console.log(result.data)
-          this.setState({MyReports:result.data.server_response})
-        // var myR = [{ "dr_name": "Dr. Zulfiqar", "apt_time": "1588534281106", "details": "lungs failed", "uid": "0", "provider_id": "0" }]
-        // this.setState({ MyReports: myR })
+            console.log(result.data)
+            if (result.data.server_response !="API failed: SyntaxError: Unexpected token ] in JSON at position 0") {
+                this.setState({ MyReports: result.data.server_response })
+            }
+            // var myR = [{ "dr_name": "Dr. Zulfiqar", "apt_time": "1588534281106", "details": "lungs failed", "uid": "0", "provider_id": "0" }]
+            // this.setState({ MyReports: myR })
 
-         })
+        })
     }
 
-    OpenDetails = (no,data) => {
-        this.setState({ Page: no ,selected:data})
+    OpenDetails = (no, data) => {
+        this.setState({ Page: no, selected: data })
     }
 
     render() {
@@ -133,7 +135,7 @@ export default class MyReports extends Component {
             );
         } else {
             return (
-                <ReportDetails  UserID={this.props.UserData[1]} OpenDetails={this.OpenDetails} Selected={this.state.selected}></ReportDetails>
+                <ReportDetails UserID={this.props.UserData[1]} OpenDetails={this.OpenDetails} Selected={this.state.selected}></ReportDetails>
             )
         }
     }

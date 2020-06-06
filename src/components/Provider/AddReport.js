@@ -40,11 +40,14 @@ export default class AddReport extends Component {
             repde:"",
             reptim:"",
             reptitl:"",
+            DateEn:null,
         }
     }
 
     Addencounter = () => {
-        var link = "http://18.234.214.14:3639/encounter/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details
+        var d=new Date().getTime().toString();
+        this.setState({DateEn:d})
+        var link = "http://18.234.214.14:3639/encounter/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details+"&apt_time="+d+"&provider_id="+this.props.UserData[5]
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -88,29 +91,29 @@ export default class AddReport extends Component {
     }
     AddReports = () => {
 
-        var pre = { "title": this.state.ReportTitle, "details": this.state.ReportDetails }
-        var List = this.state.Pres
-        List.push(pre)
-        console.log(List)
-        this.setState({ Reports: List })
+        var re = { "title": this.state.ReportTitle, "details": this.state.ReportDetails }
+        var Lists = this.state.Reports
+        Lists.push(re)
+        console.log(Lists)
+        this.setState({ Reports: Lists })
 
         var d=new Date();
         var del='{"description": "'+ this.state.ReportDetails+'"}'
         var tim='{"time": "'+d+'"}'
         var tit='{"title": "'+this.state.ReportTitle+'"} '
         if(this.state.reptitl==""){
-            this.setState({repde:del,reptitl:tim,reptitl:tit})
+            this.setState({repde:del,reptim:tim,reptitl:tit})
         }else{
             var a=this.state.repde+"||"+del
             var b=this.state.reptim+"||"+tim
             var c=this.state.reptitl+"||"+tit
-            this.setState({repde:a,reptitl:c,reptitl:b})
+            this.setState({repde:a,reptitl:c,reptim:b})
         }
          
     }
     SavePres = () => {
-        var dat=new Date()
-        var link = " http://18.234.214.14:3639/prescription/add?&cnic" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details+"&medicine="+this.state.med+"&apt_time="+dat
+    
+        var link = " http://18.234.214.14:3639/prescription/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details+"&medicine="+this.state.med+"&apt_time="+this.state.DateEn
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -119,8 +122,8 @@ export default class AddReport extends Component {
 
     }
     SaveReport=()=>{
-        var dat=new Date()
-        var link = "http://18.234.214.14:3639/report/add?cnic=" + this.state.cnic+"&apt_time="+dat + "&details=" + this.state.details+ "&dr_name=" + this.state.doctorname +"&report_details="+this.state.repde+"&report_time="+this.state.reptim+"&report_title="+this.state.reptitl
+    
+        var link = "http://18.234.214.14:3639/report/add?cnic=" + this.state.cnic+"&apt_time="+this.state.DateEn + "&details=" + this.state.details+ "&dr_name=" + this.state.doctorname +"&report_details="+this.state.repde+"&report_time="+this.state.reptim+"&report_title="+this.state.reptitl
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -128,6 +131,9 @@ export default class AddReport extends Component {
             this.props.changePageState(0, this.props.PatData)
         })
 
+    }
+    goback=()=>{
+        this.props.changePageState(1, this.props.PatData)
     }
 
     render() {
@@ -139,11 +145,19 @@ export default class AddReport extends Component {
                             <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>Add Encounter</Text>
                             <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>{this.state.name}</Text>
                         </View>
+                        <View style={{flexDirection:'row',width:'50%'}}>
                         <TouchableOpacity
                             onPress={this.Addencounter}
-                            style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                            style={{ width: "50%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Save Encounter</Text>
                         </TouchableOpacity>
+                        <Text>   </Text>
+                        <TouchableOpacity
+                            onPress={this.goback}
+                            style={{ width: "50%", height: 30, backgroundColor: "#777", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Back</Text>
+                        </TouchableOpacity>
+                        </View>
                     </View>
                     {/* <View style={{ height: 20 }}></View>
                 <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'space-between' }}>

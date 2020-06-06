@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, Text, View, Button, Image,TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons, FontAwesome, Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 
@@ -22,7 +22,7 @@ export default class ReportDetails extends Component {
                 },
             ],
             Pres: [],
-            LapRep:[],
+            LapRep: [],
         }
     }
     componentWillMount() {
@@ -30,21 +30,46 @@ export default class ReportDetails extends Component {
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
-          this.setState({MyReports:result.data.server_response[0]})
+          this.setState({Pres:result.data.server_response[0]})
         // var myR = [ [ { "name": "med_name", "dose": "2 daily" }, { "nam": "med_name", "dose": "3 daily" } ] ]
         // this.setState({ Pres: myR[0] })
 
           })
+          var link = "http://18.234.214.14:3639/report/get?enc_id="+this.props.Selected.uid
+          console.log(link)
+          axios.get(link).then((result) => {
+            console.log(result.data)
+           // this.setState({LapRep:result.data.server_response})
+          // var myR = [ [ { "name": "med_name", "dose": "2 daily" }, { "nam": "med_name", "dose": "3 daily" } ] ]
+          // this.setState({ Pres: myR[0] })
+          let titl = result.data.server_response[0][0]
+          let desp = result.data.server_response[2][0]
+          var replist=[]
+  
+         
+          for (var i=0;i<desp.length;i++){
+              let rep ={"title":titl[i].title,"Desp":desp[i].description}
+              replist.push(rep)
+          }
+  
+          console.log(replist)
+  
+          this.setState({ LapRep: replist })
 
-        var link = "http://18.234.214.14:3639/report/add?cnic="+this.props.UserID+"&apt_time="+this.props.Selected.apt_time+"&details="+this.props.Selected.details
-        console.log(link)
-        axios.get(link).then((result) => {
-          console.log(result.data)
-          this.setState({MyReports:result.data.server_response[0]})
+            })
+
+      //  var myR = { "0": [[{ "title": "title_1" }, { "title": "title_2" }]], "1": [[{ "time": "1234" }, { "time": "12345" }]], "2": [[{ "description": "description_here_1" }, { "description": "description_here_2" }]] }
+        
+
+        // var link = "http://18.234.214.14:3639/report/add?cnic="+this.props.UserID+"&apt_time="+this.props.Selected.apt_time+"&details="+this.props.Selected.details
+        // console.log(link)
+        // axios.get(link).then((result) => {
+        //   console.log(result.data)
+        //   this.setState({MyReports:result.data.server_response[0]})
         // var myR = [ [ { "name": "med_name", "dose": "2 daily" }, { "name": "med_name", "dose": "3 daily" } ] ]
         // this.setState({ LapRep: myR[0] })
 
-          })
+        //    })
     }
 
 
@@ -54,29 +79,36 @@ export default class ReportDetails extends Component {
                 <View style={{ width: "100%", flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <View>
                         <Text style={{ fontSize: 16, color: "#089BAB", fontWeight: "bold" }}>My Report Detail</Text>
- 
+
                     </View>
                     <TouchableOpacity
-                        onPress={()=>this.props.OpenDetails(0,this.props.Selected)}
+                        onPress={() => this.props.OpenDetails(0, this.props.Selected)}
                         style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
                         <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Back</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ height: 20 }}></View>
                 <View style={{ flex: 1 }}>
-                
-                    
-                        <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Provider Name</Text>
-                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold",marginBottom:'1%' }}>{this.props.Selected.dr_name}</Text>
-                        <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Details</Text>
-                        <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom:'1%' }}>{this.props.Selected.details}</Text>
-                        <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Prescriptions</Text>
-                        <FlatList
-                            data={this.state.Pres}
-                            renderItem={({ item }) => 
-                            <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom:2 }}>Med name : {item.name}, Dose : {item.dose}</Text>}
-                            keyExtractor={item => item.id}
-                        />
+
+
+                    <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Provider Name</Text>
+                    <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom: '1%' }}>{this.props.Selected.dr_name}</Text>
+                    <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Details</Text>
+                    <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom: '1%' }}>{this.props.Selected.details}</Text>
+                    <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" }}>Prescriptions</Text>
+                    <FlatList
+                        data={this.state.Pres}
+                        renderItem={({ item }) =>
+                            <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom: 2 }}>Med name : {item.name}, Dose : {item.dose}</Text>}
+                        keyExtractor={item => item.id}
+                    />
+                    <Text style={{ fontSize: 12, color: "#777", fontWeight: "bold" ,}}>Lab Report</Text>
+                    <FlatList
+                        data={this.state.LapRep}
+                        renderItem={({ item }) =>
+                            <Text style={{ fontSize: 14, color: "#000", fontWeight: "bold", marginBottom: 2 }}>Title : {item.title}, Description : {item.Desp}</Text>}
+                        keyExtractor={item => item.id}
+                    />
 
                 </View>
 
