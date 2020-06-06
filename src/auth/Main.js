@@ -11,7 +11,7 @@ export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PageState: 0,
+      PageState: 1,
       UserData: this.props.navigation.getParam('UserData', 'Something')
     }
   }

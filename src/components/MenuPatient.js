@@ -26,10 +26,10 @@ export default class MenuPatient extends Component {
         <View style={styles.menuStyle}>
           <View></View>
           <View  >
-            <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(0)}>
+            {/* <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(0)}>
               <MaterialIcons name="dashboard" size={32} color="#FFF"></MaterialIcons>
               <Text style={{ fontSize: 12, color: '#fff' }}>Dashboard</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={{ height: 20 }}></View>
             <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>this.changepage(1)}>
               <FontAwesome name="hospital-o" size={32} color="#FFF"></FontAwesome>
