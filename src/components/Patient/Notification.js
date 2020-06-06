@@ -47,7 +47,7 @@ export default class Hospitals extends Component {
     }
 
     componentWillMount=()=>{
-        var  link = " http://192.168.32.134:3639/patient_permission_requests_list/get?pat_cnic="+this.props.UserData[1]
+        var  link = " http://18.234.214.14:3639/patient_permission_requests_list/get?pat_cnic="+this.props.UserData[1]
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)

@@ -26,7 +26,7 @@ export default class ReportDetails extends Component {
         }
     }
     componentWillMount() {
-        var link = "  http://192.168.32.134:3639/prescription/get?enc_id="+this.props.Selected.uid
+        var link = "  http://18.234.214.14:3639/prescription/get?enc_id="+this.props.Selected.uid
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
@@ -36,7 +36,7 @@ export default class ReportDetails extends Component {
 
           })
 
-        var link = "http://192.168.32.134:3639/report/add?cnic="+this.props.UserID+"&apt_time="+this.props.Selected.apt_time+"&details="+this.props.Selected.details
+        var link = "http://18.234.214.14:3639/report/add?cnic="+this.props.UserID+"&apt_time="+this.props.Selected.apt_time+"&details="+this.props.Selected.details
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)

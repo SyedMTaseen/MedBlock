@@ -59,7 +59,7 @@ export default class Hospitals extends Component {
         }
     }
     changeReadAccess = (val) => {
-        var link = "http://192.168.32.134:3639/patient_permissions_list/update?pat_cnic="+this.props.UserData[1]+"&prov_id="+val+"&access_level=1"
+        var link = "http://18.234.214.14:3639/patient_permissions_list/update?pat_cnic="+this.props.UserData[1]+"&prov_id="+val+"&access_level=1"
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
@@ -69,7 +69,7 @@ export default class Hospitals extends Component {
 
     }
     changerRWAccess = (val) => {
-        var   link = "http://192.168.32.134:3639/patient_permissions_list/update?pat_cnic="+this.props.UserData[1]+"&prov_id="+val+"&access_level=2"
+        var   link = "http://18.234.214.14:3639/patient_permissions_list/update?pat_cnic="+this.props.UserData[1]+"&prov_id="+val+"&access_level=2"
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)
@@ -82,7 +82,7 @@ export default class Hospitals extends Component {
         this.fetchData()
     }
     fetchData=()=>{
-        var link = "http://192.168.32.134:3639/patient_permissions_list/get?pat_cnic="+this.props.UserData[1]
+        var link = "http://18.234.214.14:3639/patient_permissions_list/get?pat_cnic="+this.props.UserData[1]
         console.log(link)
         axios.get(link).then((result) => {
           console.log(result.data)

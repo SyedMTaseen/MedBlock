@@ -18,12 +18,12 @@ function Item({ title, alertReadPermission, alertReadWritePermission }) {
                 </View>
                 <View style={{ flexDirection: "row", alignItems: 'center', width: "15%", justifyContent: 'space-between' }} >
                     <TouchableOpacity
-                        onPress={() => alertReadPermission(title.uid)}
+                        onPress={() => alertReadPermission(title.cnic)}
                         style={{ width: 40, height: 20, backgroundColor: title.access_level == "1" ? '#45D053' : "#7777", borderRadius: 60, borderColor: "#4444", borderWidth: 1, justifyContent: 'center', }}>
 
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={() => alertReadWritePermission(title.uid)}
+                        onPress={() => alertReadWritePermission(title.cnic)}
                         style={{ width: 40, height: 20, backgroundColor: title.access_level == "2" ? '#45D053' : "#7777", borderRadius: 60, borderColor: "#4444", borderWidth: 1, justifyContent: 'center', }}>
 
                     </TouchableOpacity>
@@ -66,7 +66,7 @@ export default class PatientList extends Component {
     }
 
     requestPermission = (id, rt) => {
-        var link = "http://192.168.32.134:3639/patient_permission_requests_list/update?pat_cnic=" + id + "&prov_id=" + this.props.UserData[5] + "&access_level=" + rt
+        var link = "http://18.234.214.14:3639/patient_permission_requests_list/update?pat_cnic=" + id + "&prov_id=" + this.props.UserData[5] + "&access_level=" + rt
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -87,7 +87,7 @@ export default class PatientList extends Component {
 
     }
     componentWillMount = () => {
-        var link = " http://192.168.32.134:3639/provider_permissions_list/get?provider_id=" + this.props.UserData[5]
+        var link = " http://18.234.214.14:3639/provider_permissions_list/get?provider_id=" + this.props.UserData[5]
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)

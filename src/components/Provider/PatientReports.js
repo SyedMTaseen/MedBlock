@@ -69,7 +69,7 @@ export default class MyReports extends Component {
     componentWillMount = () => {
 
 
-        var link = "http://192.168.32.134:3639/encounter/get?cnic=" + this.state.cnic
+        var link = "http://18.234.214.14:3639/encounter/get?cnic=" + this.state.cnic
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)

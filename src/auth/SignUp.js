@@ -33,7 +33,7 @@ export default class SignUp extends Component {
 
   SignUp=()=>{
     if (this.state.UserIs) {
-      var  link = "http://192.168.32.134:3639/patient/signup?fname="+this.state.username+"&pat_address="+this.state.address+"&city="+this.state.city+"&country="+this.state.country+"&weight="+this.state.weight+"&height="+this.state.height+"&cnic="+this.state.cnic+"&dob="+this.state.dateOfBirth+"&email="+this.state.email+"&password="+this.state.password
+      var  link = "http://18.234.214.14:3639/patient/signup?fname="+this.state.username+"&pat_address="+this.state.address+"&city="+this.state.city+"&country="+this.state.country+"&weight="+this.state.weight+"&height="+this.state.height+"&cnic="+this.state.cnic+"&dob="+this.state.dateOfBirth+"&email="+this.state.email+"&password="+this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)
@@ -43,7 +43,7 @@ export default class SignUp extends Component {
 
     } else {
 
-      var  link = "http://192.168.32.134:3639/provider/signup?fname="+this.state.username+"&prov_address="+this.state.prov_address+"&city="+this.state.city+"&country="+this.state.country+"&prov_type="+this.state.prov_type+"&email="+this.state.email+"&password="+this.state.password
+      var  link = "http://18.234.214.14:3639/provider/signup?fname="+this.state.username+"&prov_address="+this.state.prov_address+"&city="+this.state.city+"&country="+this.state.country+"&prov_type="+this.state.prov_type+"&email="+this.state.email+"&password="+this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)

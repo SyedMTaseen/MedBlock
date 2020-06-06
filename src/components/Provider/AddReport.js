@@ -44,7 +44,7 @@ export default class AddReport extends Component {
     }
 
     AddReport = () => {
-        var link = "http://192.168.32.134:3639/encounter/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details
+        var link = "http://18.234.214.14:3639/encounter/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -110,7 +110,7 @@ export default class AddReport extends Component {
     }
     SavePres = () => {
         var dat=new Date()
-        var link = " http://192.168.32.134:3639/prescription/add?&cnic" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details+"&medicine="+this.state.med+"&apt_time="+dat
+        var link = " http://18.234.214.14:3639/prescription/add?&cnic" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details+"&medicine="+this.state.med+"&apt_time="+dat
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)
@@ -120,7 +120,7 @@ export default class AddReport extends Component {
     }
     SaveReport=()=>{
         var dat=new Date()
-        var link = "http://192.168.32.134:3639/report/add?cnic=" + this.state.cnic+"&apt_time="+dat + "&details=" + this.state.details+ "&dr_name=" + this.state.doctorname +"&report_details="+this.state.repde+"&report_time="+this.state.reptim+"&report_title="+this.state.reptitl
+        var link = "http://18.234.214.14:3639/report/add?cnic=" + this.state.cnic+"&apt_time="+dat + "&details=" + this.state.details+ "&dr_name=" + this.state.doctorname +"&report_details="+this.state.repde+"&report_time="+this.state.reptim+"&report_title="+this.state.reptitl
         console.log(link)
         axios.get(link).then((result) => {
             console.log(result.data)

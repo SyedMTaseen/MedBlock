@@ -26,13 +26,13 @@ export default class Login extends Component {
 
 
     if (this.state.UserIs) {
-      var link = " http://192.168.32.134:3639/patient/login?username=" + this.state.username + "&password=" + this.state.password
+      var link = " http://18.234.214.14:3639/patient/login?username=" + this.state.username + "&password=" + this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)
         var data = result.data.server_response
 
-        if (data[0] == undefined) {
+        if (data == "Login failed!") {
           alert("Invalid Login")
         } else {
           this.props.navigation.navigate('PatientMain', {
@@ -47,14 +47,14 @@ export default class Login extends Component {
 
     } else {
 
-      var link = "http://192.168.32.134:3639/provider/login?username=" + this.state.username + "&password=" + this.state.password
+      var link = "http://18.234.214.14:3639/provider/login?username=" + this.state.username + "&password=" + this.state.password
       console.log(link)
       axios.get(link).then((result) => {
         console.log(result.data)
         var data = result.data.server_response
         // var data = { "0": "south", "1": "south@south.com", "2": "lab", "3": "south@south.com", "4": "0x064FD681DcE8A3EA2e821e3D2C9e85A04fe0ED71", "5": "0" }
        
-        if (data[0] == undefined) {
+        if (data == "Login failed!") {
           alert("Invalid Login")
         } else {
           this.props.navigation.navigate('ProviderMain', {
@@ -172,7 +172,7 @@ export default class Login extends Component {
                 placeholder='CNIC'
                 placeholderTextColor='#777'
                 autoCapitalize='none'
-                onChangeText={(password) => { this.setState({ password }); }}//email set
+                onChangeText={(username) => { this.setState({ username }); }}//email set
               />
             </View>
           </View>
