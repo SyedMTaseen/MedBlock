@@ -43,7 +43,7 @@ export default class AddReport extends Component {
         }
     }
 
-    AddReport = () => {
+    Addencounter = () => {
         var link = "http://18.234.214.14:3639/encounter/add?cnic=" + this.state.cnic + "&dr_name=" + this.state.doctorname + "&details=" + this.state.details
         console.log(link)
         axios.get(link).then((result) => {
@@ -86,7 +86,7 @@ export default class AddReport extends Component {
         this.setState({ Pres: List })
 
     }
-    AddReport = () => {
+    AddReports = () => {
 
         var pre = { "title": this.state.ReportTitle, "details": this.state.ReportDetails }
         var List = this.state.Pres
@@ -140,7 +140,7 @@ export default class AddReport extends Component {
                             <Text style={{ fontSize: 12, color: "#c3c3c3", fontWeight: "600" }}>{this.state.name}</Text>
                         </View>
                         <TouchableOpacity
-                            onPress={this.AddReport}
+                            onPress={this.Addencounter}
                             style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>Save Encounter</Text>
                         </TouchableOpacity>
@@ -387,7 +387,7 @@ export default class AddReport extends Component {
                         </View>
                         <Text>    </Text>
                         <TouchableOpacity
-                            onPress={() => this.AddReport()}
+                            onPress={() => this.AddReports()}
                             style={{ width: "20%", height: 30, backgroundColor: "#089BAB", borderRadius: 60, alignItems: "center", justifyContent: 'center' }}>
                             <Text style={{ fontSize: 14, color: "#fff", fontWeight: "bold" }}>ADD</Text>
                         </TouchableOpacity>
